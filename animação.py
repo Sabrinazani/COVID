@@ -103,7 +103,7 @@ for a in range(len(reglist)):
         plt.figure(num=i)
         im.append(plt.figure(num=i))
     
-    imageio.mimsave(relist[a]+".gif",im) 
+    imageio.mimsave(reglist[a]+".gif",im) 
     
     plt.close()
         
