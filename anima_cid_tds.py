@@ -17,7 +17,7 @@ from datetime import datetime , timedelta
 
 
 
-r = requests.get('https://raw.githubusercontent.com/albertosaa/COVID/master/data/20200819.csv.zip')
+r = requests.get('https://raw.githubusercontent.com/albertosaa/COVID/master/data/20200823.csv.zip')
 
 zip_file = zipfile.ZipFile(io.BytesIO(r.content))
 
@@ -63,21 +63,19 @@ for a in cidlist:
             if (row[2] == a) and (row[1] == cidlist[a]):
                 if k == 0:
                     First_Day = row[7]#data   
-                if namelist[j] == "Casos acumulados" or namelist[j]=="Novos casos":
+                if namelist[j] == "Casos acumulados":
                     Y.append(int(row[10]))
-                elif namelist[j]=="Óbitos acumulados" or namelist[j]=="Novos óbitos":
+                elif namelist[j]=="Novos casos":
                     Y.append(int(row[11]))
+                elif namelist[j]=="Óbitos acumulados":
+                    Y.append(int(row[12]))
+                elif namelist[j]=="Novos óbitos":
+                    Y.append(int(row[13]))
                 k += 1
             
         dados = np.array(Y)
+        tipo= namelist[j] 
         
-        if namelist[j] =="Novos casos" or namelist[j] =="Novos óbitos":
-            dados_0 = np.array(Y)
-            dados = np.zeros(k)
-            for b in range(1,k):
-                dados[b]= dados_0[b]-dados_0[b-1]
-        
-        tipo= namelist[j]        
         for i in range(10,k):
             file_name = a + " - "+ tipo +" - "+ format(i,'03') +".jpg"
             if not os.path.isfile('graf_cid/'+file_name):
@@ -101,7 +99,7 @@ for a in cidlist:
                 plt.close()
 
             image.append(imageio.imread(graf_cid + file_name))
-        imageio.mimsave('gifs_cid/'+tipo+" - "+a+'.gif',image)    
+        imageio.mimsave('gifs_cid/'+a+" - "+tipo+'.gif',image)    
         
     
     
