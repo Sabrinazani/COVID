@@ -86,7 +86,7 @@ for a in cidlist:
             plt.plot(np.linspace(0,i-1,i), R_smooth_k,"r")
             plt.xlabel("Dias")
             plt.ylabel("Casos")
-            plt.title("Novos casos - "+a+" - "+date.strftime("%d/%m/%Y"))
+            plt.title("Casos acumulados - "+a+" - "+date.strftime("%d/%m/%Y"))
             plt.savefig(graf_cid + file_name,bbox_inches="tight") 
             plt.close()
 
